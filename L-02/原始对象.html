@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原始对象</title>
+</head>
+<body>
+<script>
+    var worker = new Object();
+    worker.name = "tom";
+    worker.age = 10;
+    worker.isWorking = false;
+    worker.startWork = function(){
+        if(this.isWorking) return;
+        this.isWorking = true;
+    };
+    worker["position"] = "worker";
+
+    document.write("Worker的名字是 : " + worker["name"]);
+    worker.startWork();
+    document.write("<br/>Worker的职位是 : " + worker.position);
+
+    //另外，JavaScript也提供了更快捷的定义一个原始对象的方法：
+    var worker = {
+        name : "John",
+        age : 30,
+        isWorking : false,
+        startWork : function(){
+            if(!this.isWorking){
+                this.isWorking = true;
+            }
+        }
+    };
+
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型继承</title>
+</head>
+<body>
+<p>光调用了父类型的构造函数，但是其原型中的成员依然没有建立在当前类型中。</p>
+
+
+<script>
+    function worker(name){
+        this.name=name;
+    }
+    worker.prototype.sayHello=function(){
+        document.write("hello,i am "+this.name);
+    }
+    function leader(name){
+        worker.apply(this,arguments);
+    }
+    var tom=new leader("tom");
+    //tom.sayHello();//tom.sayHello is not a function
+
+    leader.prototype=worker.prototype;
+    var jerry=new leader("jerry");
+    jerry.sayHello();
+
+
+
+</script>
+</body>
+</html>

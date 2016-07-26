@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型扩展</title>
+</head>
+<body>
+<p>大部分语言是要将成员定义写在类型定义域内部的，而JavaScript是写在外部的。</p>
+<p>利用这个特点，我们可以扩展和修改已有的类型</p>
+</body>
+<script>
+    String.prototype.startWith = function(str){
+        return str.indexOf(str) == 0;
+    };
+
+    var str = "abc";
+    document.write(str.startWith("ab"));
+
+    //尝试再此处定义一个endWith的方法并调试
+</script>
+</html>

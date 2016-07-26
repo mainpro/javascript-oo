@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>构造方法</title>
+</head>
+<body>
+<script>
+    function worker(name, age){
+        this.name = name;
+        this.age = age;
+        this.isWorking = false;
+        this.startWork = function(){
+            if(this.isWorking) return;
+            this.isWorking = true;
+        };
+    }
+
+    var tom = new worker("tom", 24);
+    tom.startWork();
+
+</script>
+</body>
+</html>

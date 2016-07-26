@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>优化的继承方法</title>
+</head>
+<body>
+很明显，直接继承方法所得到的结果，并不是我们所期望的。子类的修改不应该对父类造成影响。那我们不能让父类的原型直接赋给子类的原型，而用父类型的一个副本就行了。
+<script>
+    function worker(name, age){
+        this.name = name;
+        this.age = age;
+        this.isWorking = false;
+    }
+    worker.prototype.startWork = function(){
+        if(this.isWorking) return;
+        this.isWorking = true;
+    };
+
+    function leader(name, age){
+        worker.apply(this, arguments);
+        this.workers = [];
+    }
+    leader.prototype = new worker();	//重点
+    leader.prototype.startWork = function(){
+        //重写工人的开始工作方法，工头开工时，下属工人也要开工
+        if(this.isWorking) return;
+        var workerLength = this.workers.length;
+        for(var i = 0; i < workerLength; i++){
+            this.workers[i].startWork();
+        }
+    };
+
+    var tom = new leader("tom",40);
+    var jim = new worker("jim",20);
+    tom.workers.push(jim);
+    tom.startWork();
+
+    var html = "tom和jim两个实例的startWork方法是否共用内存 : " + (tom.startWork == jim.startWork).toString();
+    document.write("<br>");
+    document.write(html);
+</script>
+</body>
+</html>

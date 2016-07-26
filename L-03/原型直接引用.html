@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型直接引用</title>
+</head>
+<body>
+<del>
+    直接继承原型不是一个合理的方式，因为直接继承并不是继承，而是直接引用，两者拥有相同的原型，一方的修改都会使另一方发生变化。
+</del>
+<script>
+    function worker(name){
+        this.name=name;
+    }
+    worker.prototype.sayHello=function(){
+        document.write("hello,i am "+this.name);
+    }
+    function leader(name){
+        worker.apply(this,arguments);
+    }
+
+    leader.prototype=worker.prototype;
+    //直接继承原型不是一个合理的方式，因为直接继承并不是继承，而是直接引用，两者拥有相同的原型，一方的修改都会使另一方发生变化。
+    leader.prototype.sayHello = function(){
+        document.write("你好， 我是"+this.name)
+    }
+    var dipu=new worker("狄浦");
+    dipu.sayHello();
+
+</script>
+</body>
+</html>

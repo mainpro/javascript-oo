@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>练习</title>
+</head>
+<body>
+请说明要输出正确的myName的值要如何修改程序?并解释原因
+<pre>
+    foo = function(){
+        this.myName = "Foo function.";
+    }
+    foo.prototype.sayHello = function(){
+        alert(this.myName);
+    }
+    foo.prototype.bar = function(){
+        setTimeout(this.sayHello, 1000);
+    }
+    var f = new foo;
+    f.bar();
+</pre>
+<script>
+    foo = function(){
+        this.myName = "Foo function.";
+    }
+    foo.prototype.sayHello = function(){
+        alert(this.myName);
+    }
+    foo.prototype.bar = function(){
+        var _that=this;
+        //this.sayHello();
+        setTimeout(this.sayHello.call(this), 1000);
+    }
+    var f = new foo;
+    f.bar();
+</script>
+</body>
+</html>

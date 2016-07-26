@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>apply</title>
+</head>
+<body>
+<p>对于由function创建的类型，其本身是无法使用$.extend进行继承的。</p>
+
+JavaScript实现类继承的第一步便是调用父类型的构造函数。
+
+<script>
+    function worker(name,age){
+        this.name=name;
+        this.age=age;
+    }
+    function leader(name,age){
+        worker.apply(this,arguments);
+    }
+
+    var tom=new leader("tom","30");
+    document.write("<br/>");
+    document.write(tom.name);
+    document.write("<br/>");
+    document.write(tom.age);
+
+</script>
+</body>
+</html>
